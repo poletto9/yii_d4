@@ -27,7 +27,7 @@ AppAsset::register($this);
 <div class="wrap">
 
     <div>
-        <img src="<?= Yii::getAlias('@web')?>/img/header.png" class="img-responsive" alt="header">
+        <img src="<?= Yii::getAlias('@web')?>/img/hero_1.jpg" class="img-responsive" alt="header">
     </div>
 
     <?php
