@@ -39,6 +39,20 @@ AppAsset::register($this);
             'class' => '',
         ],
     ]);
+
+    /**
+     * Sub Menu
+     */
+
+    $report_menu = [
+        ['label' => 'Person Report', 'url' => ['/first1']],
+    ];
+
+    $db_menu = [
+        ['label' => 'Com Status', 'url' => ['/comstatus']],
+    ];
+
+
     echo Nav::widget([
         'options' => ['class' => 'navbar-nav navbar-right'],
         'encodeLabels' => false, /* enable insert html to php */
@@ -46,6 +60,8 @@ AppAsset::register($this);
             ['label' => '<span class="glyphicon glyphicon-home"></span> Home', 'url' => ['/site/index']],
             ['label' => '<span class="glyphicon glyphicon-info-sign"></span> About', 'url' => ['/site/about']],
             ['label' => '<span class="glyphicon glyphicon-envelope"></span> Contact', 'url' => ['/site/contact']],
+            ['label' => '<span class="glyphicon glyphicon-list-alt"></span> Report', 'items' => $report_menu],
+            ['label' => '<span class="glyphicon glyphicon-cog"></span> Setting', 'items' => $db_menu],
             Yii::$app->user->isGuest ? (
                 ['label' => '<span class="glyphicon glyphicon-log-in"></span> Login', 'url' => ['/site/login']]
             ) : (
