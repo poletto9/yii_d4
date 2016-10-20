@@ -122,4 +122,20 @@ class SiteController extends Controller
     {
         return $this->render('about');
     }
+
+    public function actionColumnchart(){
+
+        $conn = \Yii::$app->db;
+        $sql = 'SELECT t.com_type_name, COUNT(c.com_id) as cdata FROM com c
+                LEFT JOIN com_type t ON t.com_type_id = c.com_type_id
+                GROUP BY c.com_type_id';
+        $cmd = $conn->createCommand($sql);
+        $data = $cmd->queryAll();
+
+        foreach ($data as $item) {
+            $chart[]=['name'=>$item['com_type_name'],'data'=>[intval($item['cdata'])]];
+        }
+
+        return $this->render('columnchart',['data'=>$chart]);
+    }
 }

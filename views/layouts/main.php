@@ -32,7 +32,7 @@ AppAsset::register($this);
 
     <?php
     NavBar::begin([
-        'brandLabel' => '<span class="glyphicon glyphicon-cloud"></span> Yii Framework Project Day 3 (Oct 19, 2016)',
+        'brandLabel' => '<span class="glyphicon glyphicon-cloud"></span> Yii Framework Project Day 4 (Oct 20, 2016)',
         'brandUrl' => Yii::$app->homeUrl,
         'options' => [
 //            'class' => 'navbar-inverse navbar-fixed-top',
@@ -46,10 +46,20 @@ AppAsset::register($this);
 
     $report_menu = [
         ['label' => 'Person Report', 'url' => ['/first1']],
+        ['label' => 'Computer Report without ORM', 'url' => ['/first1/no_orm']],
+        ['label' => 'Computer Report with ORM', 'url' => ['/com/selectdata']],
+        ['label' => 'Computer Type Report', 'url' => ['/first1/comtype']],
+        ['label' => 'Service Report', 'url' => ['/first1/service']],
+        ['label' => 'Chart Report', 'url' => ['/site/columnchart']],
     ];
 
     $db_menu = [
-        ['label' => 'Com Status', 'url' => ['/comstatus']],
+        ['label' => 'Computer Status', 'url' => ['/comstatus']],
+        ['label' => 'Computer Type', 'url' => ['/comtype']],
+    ];
+
+    $regis_menu = [
+        ['label' => 'Computer', 'url' => ['/com']],
     ];
 
 
@@ -58,6 +68,7 @@ AppAsset::register($this);
         'encodeLabels' => false, /* enable insert html to php */
         'items' => [
             ['label' => '<span class="glyphicon glyphicon-home"></span> Home', 'url' => ['/site/index']],
+            ['label' => '<span class="glyphicon glyphicon-qrcode"></span> Registration', 'items' => $regis_menu],
             ['label' => '<span class="glyphicon glyphicon-info-sign"></span> About', 'url' => ['/site/about']],
             ['label' => '<span class="glyphicon glyphicon-envelope"></span> Contact', 'url' => ['/site/contact']],
             ['label' => '<span class="glyphicon glyphicon-list-alt"></span> Report', 'items' => $report_menu],

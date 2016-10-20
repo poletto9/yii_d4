@@ -121,4 +121,17 @@ class ComController extends Controller
             throw new NotFoundHttpException('The requested page does not exist.');
         }
     }
+
+    public function actionSelectdata(){
+
+        /**
+         * Select * from Com
+         * direct where query -> com_type_id=1
+         * indirect where query -> com_type_id=:id',[':id'=>1]
+         * method get parameter -> url :: &tid=1
+         */
+        $com=Com::find()->where('com_type_id=:id',[':id'=>1])->all();
+
+        return $this->render('selectdata',['com'=>$com]);
+    }
 }
