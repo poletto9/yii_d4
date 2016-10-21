@@ -2,6 +2,7 @@
 
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
+use kartik\widgets\DatePicker;
 
 /* @var $this yii\web\View */
 /* @var $model app\models\Com */
@@ -12,7 +13,7 @@ use yii\widgets\ActiveForm;
 
     <?php $form = ActiveForm::begin(); ?>
 
-    <?= $form->field($model, 'com_type_id')->textInput() ?>
+    <?= $form->field($model, 'com_type_id')->dropDownList(\app\models\ComType::GetList(),['prompt'=>'Choose...']) ?>
 
     <?= $form->field($model, 'brand')->textInput(['maxlength' => true]) ?>
 
@@ -44,7 +45,17 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'com_date')->textInput() ?>
 
-    <?= $form->field($model, 'insurance_date')->textInput() ?>
+    <?= $form->field($model, 'insurance_date')->widget(DatePicker::className(),[
+        'language' => 'th',
+        'options' => ['placeholder'=>'choose date..','readonly'=>true],
+        'type' => DatePicker::TYPE_COMPONENT_APPEND,'pluginOptions'=>[
+            'format' => 'yyy-mm-dd',
+            'todayHighlight' => true,
+            'todayBtn' => true,
+            'autoclose' => true,
+        ]
+    ]);
+    ?>
 
     <?= $form->field($model, 'create_date')->textInput() ?>
 
@@ -54,11 +65,28 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'note')->textInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'discharge_date')->textInput() ?>
+    <?= $form->field($model, 'discharge_date')->widget(DatePicker::className(),[
+        'language' => 'th',
+        'options' => ['placeholder'=>'choose date..','readonly'=>true],
+        'type' => DatePicker::TYPE_COMPONENT_APPEND,'pluginOptions'=>[
+            'format' => 'yyy-mm-dd',
+            'todayHighlight' => true,
+            'todayBtn' => true,
+            'autoclose' => true,
+        ]
+    ]);
+    ?>
 
-    <?= $form->field($model, 'buy_type_id')->textInput() ?>
+    <?= $form->field($model, 'buy_type_id')->dropDownList(\app\models\BuyType::GetList(),['prompt'=>'Choose...']) ?>
 
-    <?= $form->field($model, 'budget_id')->textInput() ?>
+    <?= $form->field($model, 'budget_id')->widget(\kartik\widgets\Select2::className(),[
+        'data' => \app\models\Budget::GetList(),
+        'options' => ['placeholder'=>'choose...'],
+        'pluginOptions' => [
+            'allowClear' => true
+        ],
+    ]);
+    ?>
 
     <div class="form-group">
         <?= Html::submitButton($model->isNewRecord ? 'Create' : 'Update', ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
