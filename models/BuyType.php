@@ -6,19 +6,19 @@ use Yii;
 use yii\helpers\ArrayHelper;
 
 /**
- * This is the model class for table "com_type".
+ * This is the model class for table "buy_type".
  *
- * @property integer $com_type_id
- * @property string $com_type_name
+ * @property integer $buy_type_id
+ * @property string $buy_type_name
  */
-class ComType extends \yii\db\ActiveRecord
+class BuyType extends \yii\db\ActiveRecord
 {
     /**
      * @inheritdoc
      */
     public static function tableName()
     {
-        return 'com_type';
+        return 'buy_type';
     }
 
     /**
@@ -27,7 +27,7 @@ class ComType extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['com_type_name'], 'string', 'max' => 255],
+            [['buy_type_name'], 'string', 'max' => 255],
         ];
     }
 
@@ -37,13 +37,13 @@ class ComType extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'com_type_id' => 'Com Type ID',
-            'com_type_name' => 'Com Type Name',
+            'buy_type_id' => 'Buy Type ID',
+            'buy_type_name' => 'Buy Type Name',
         ];
     }
 
     public static function GetList()
     {
-        return ArrayHelper::map(self::find()->all(),'com_type_id','com_type_name');
+        return ArrayHelper::map(self::find()->all(),'buy_type_id','buy_type_name');
     }
 }

@@ -49,9 +49,10 @@ class Com extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
+            [['com_type_id','brand'],'required'], //กำหนดการบังคับให้กรอกข้อมูล
             [['com_type_id', 'depart_id', 'com_status_id', 'buy_type_id', 'budget_id'], 'integer'],
             [['detail'], 'string'],
-            [['accept_date', 'com_date', 'insurance_date', 'create_date', 'update_date', 'discharge_date'], 'safe'],
+            [['accept_date', 'com_date', 'insurance_date', 'create_date', 'update_date', 'discharge_date'], 'safe'], // ถ้ามีการ design ตารางเพิ่ม ให้ใส่ฟิลด์ใหม่ที่เพิ่ม ลงในนี้ด้วย
             [['price'], 'number'],
             [['brand', 'asset_code', 'machine_code', 'cpu_type', 'cpu_speed', 'ram', 'display', 'cd_type', 'harddisk', 'staff', 'note'], 'string', 'max' => 255],
         ];

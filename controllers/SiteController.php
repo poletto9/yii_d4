@@ -14,20 +14,8 @@ class SiteController extends Controller
     /**
      * @inheritdoc
      */
-    public function behaviors()
-    {
+    public function behaviors() {
         return [
-            'access' => [
-                'class' => AccessControl::className(),
-                'only' => ['logout'],
-                'rules' => [
-                    [
-                        'actions' => ['logout'],
-                        'allow' => true,
-                        'roles' => ['@'],
-                    ],
-                ],
-            ],
             'verbs' => [
                 'class' => VerbFilter::className(),
                 'actions' => [
@@ -70,17 +58,14 @@ class SiteController extends Controller
      */
     public function actionLogin()
     {
-        if (!Yii::$app->user->isGuest) {
-            return $this->goHome();
-        }
-
         $model = new LoginForm();
-        if ($model->load(Yii::$app->request->post()) && $model->login()) {
-            return $this->goBack();
-        }
-        return $this->render('login', [
-            'model' => $model,
-        ]);
+        if (Yii::$app->request->post()) {
+            if ($model->load(Yii::$app->request->post()) && $model->login()) {
+                return $this->goHome();
+            } else {
+                Yii::$app->session->setFlash('LoginErr', 'กรุณาตรวจสอบ ผู้ใช้งาน/รหัสผ่าน');
+            }
+        } return $this->render('login', [ 'model' => $model, ]);
     }
 
     /**
@@ -90,9 +75,9 @@ class SiteController extends Controller
      */
     public function actionLogout()
     {
-        Yii::$app->user->logout();
+        Yii::$app->session->removeAll();
 
-        return $this->goHome();
+        return $this->redirect(['site/index']);
     }
 
     /**
@@ -137,5 +122,9 @@ class SiteController extends Controller
         }
 
         return $this->render('columnchart',['data'=>$chart]);
+    }
+
+    public function actionActiveform(){
+        return $this->render('activeform');
     }
 }

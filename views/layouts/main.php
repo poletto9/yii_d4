@@ -51,6 +51,7 @@ AppAsset::register($this);
         ['label' => 'Computer Type Report', 'url' => ['/first1/comtype']],
         ['label' => 'Service Report', 'url' => ['/first1/service']],
         ['label' => 'Chart Report', 'url' => ['/site/columnchart']],
+        ['label' => 'PDF Report', 'url' => ['/pdftest'],'linkOptions' => ['target'=>'_blank']],
     ];
 
     $db_menu = [
@@ -68,20 +69,23 @@ AppAsset::register($this);
         'encodeLabels' => false, /* enable insert html to php */
         'items' => [
             ['label' => '<span class="glyphicon glyphicon-home"></span> Home', 'url' => ['/site/index']],
-            ['label' => '<span class="glyphicon glyphicon-qrcode"></span> Registration', 'items' => $regis_menu],
+            ['label' => '<span class="glyphicon glyphicon-baby-formula"></span> Form', 'url' => ['/site/activeform']],
+            ['label' => '<span class="glyphicon glyphicon-qrcode"></span> Registration', 'items' => $regis_menu,'visible'=>Yii::$app->session->has('username')],
             ['label' => '<span class="glyphicon glyphicon-info-sign"></span> About', 'url' => ['/site/about']],
             ['label' => '<span class="glyphicon glyphicon-envelope"></span> Contact', 'url' => ['/site/contact']],
-            ['label' => '<span class="glyphicon glyphicon-list-alt"></span> Report', 'items' => $report_menu],
-            ['label' => '<span class="glyphicon glyphicon-cog"></span> Setting', 'items' => $db_menu],
-            Yii::$app->user->isGuest ? (
-                ['label' => '<span class="glyphicon glyphicon-log-in"></span> Login', 'url' => ['/site/login']]
+            ['label' => '<span class="glyphicon glyphicon-list-alt"></span> Report', 'items' => $report_menu,'visible'=>Yii::$app->session->has('username')],
+            ['label' => '<span class="glyphicon glyphicon-cog"></span> Setting', 'items' => $db_menu,'visible'=>Yii::$app->session->get('admin_right')==1], // แบ่งการเห็นเมนูตามสิทธิของผู้ใช้
+
+            /**
+             * check that same if then else
+             */
+            !Yii::$app->session->get('username') ? (
+            ['label' => 'Login', 'url' => ['/site/login']]
             ) : (
-                '<li>'
-                . Html::beginForm(['/site/logout'], 'post', ['class' => 'navbar-form'])
+                '<li>' . Html::beginForm(['/site/logout'], 'post', ['class' => 'navbar-form'])
                 . Html::submitButton(
-                    '<span class="glyphicon glyphicon-log-out"></span> Logout (' . Yii::$app->user->identity->username . ')',
-                    ['class' => 'btn btn-link']
-                )
+                    'Logout (' . Yii::$app->session->get('username') . ')',
+                    ['class' => 'btn btn-link'] )
                 . Html::endForm()
                 . '</li>'
             )

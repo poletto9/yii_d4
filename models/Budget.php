@@ -6,19 +6,19 @@ use Yii;
 use yii\helpers\ArrayHelper;
 
 /**
- * This is the model class for table "com_type".
+ * This is the model class for table "budget".
  *
- * @property integer $com_type_id
- * @property string $com_type_name
+ * @property integer $budget_id
+ * @property string $budget_name
  */
-class ComType extends \yii\db\ActiveRecord
+class Budget extends \yii\db\ActiveRecord
 {
     /**
      * @inheritdoc
      */
     public static function tableName()
     {
-        return 'com_type';
+        return 'budget';
     }
 
     /**
@@ -27,7 +27,7 @@ class ComType extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['com_type_name'], 'string', 'max' => 255],
+            [['budget_name'], 'string', 'max' => 255],
         ];
     }
 
@@ -37,13 +37,13 @@ class ComType extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'com_type_id' => 'Com Type ID',
-            'com_type_name' => 'Com Type Name',
+            'budget_id' => 'Budget ID',
+            'budget_name' => 'Budget Name',
         ];
     }
 
     public static function GetList()
     {
-        return ArrayHelper::map(self::find()->all(),'com_type_id','com_type_name');
+        return ArrayHelper::map(self::find()->all(),'budget_id','budget_name');
     }
 }

@@ -3,6 +3,9 @@
 /* @var $this yii\web\View */
 
 $this->title = 'My Yii Application';
+
+$fullname = Yii::$app->session->get('userfullname');
+echo $fullname;
 ?>
 <div class="site-index">
 
